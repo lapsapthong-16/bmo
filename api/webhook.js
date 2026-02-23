@@ -5,7 +5,7 @@ const { appendExpense } = require("../sheets");
  * Send a message to a Telegram chat via HTTP API.
  */
 async function sendTelegramMessage(chatId, text) {
-    const apiUrl = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
+    const apiUrl = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN.trim()}`;
     const res = await fetch(`${apiUrl}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
