@@ -1,15 +1,13 @@
 {
-    "name": "expense-tracker-bot",
+    "name": "bmo-expense-bot",
     "version": "1.0.0",
-    "description": "Telegram bot that tracks expenses and writes them to Google Sheets",
-    "main": "bot.js",
+    "description": "Telegram expense tracker bot → Google Sheets (Vercel webhook)",
     "scripts": {
-        "start": "node bot.js"
+        "set-webhook": "node scripts/set-webhook.js",
+        "encode-key": "node scripts/encode-key.js"
     },
     "dependencies": {
-        "dotenv": "^16.4.7",
         "googleapis": "^144.0.0",
-        "groq-sdk": "^0.9.0",
-        "node-telegram-bot-api": "^0.66.0"
+        "groq-sdk": "^0.9.0"
     }
 }
