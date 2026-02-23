@@ -8,7 +8,15 @@
  *   https://your-app.vercel.app/api/webhook
  */
 
-require("dotenv").config();
+// Load .env manually (no dotenv dependency)
+const fs = require("fs");
+const envPath = require("path").join(__dirname, "..", ".env");
+if (fs.existsSync(envPath)) {
+    fs.readFileSync(envPath, "utf-8").split("\n").forEach((line) => {
+        const [key, ...val] = line.trim().split("=");
+        if (key && !key.startsWith("#")) process.env[key] = val.join("=");
+    });
+}
 
 const VERCEL_URL = process.argv[2];
 

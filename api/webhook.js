@@ -1,13 +1,12 @@
 const { parseExpense } = require("../llm");
 const { appendExpense } = require("../sheets");
 
-const TELEGRAM_API = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
-
 /**
  * Send a message to a Telegram chat via HTTP API.
  */
 async function sendTelegramMessage(chatId, text) {
-    await fetch(`${TELEGRAM_API}/sendMessage`, {
+    const apiUrl = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`;
+    const res = await fetch(`${apiUrl}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -16,6 +15,10 @@ async function sendTelegramMessage(chatId, text) {
             parse_mode: "Markdown",
         }),
     });
+    const data = await res.json();
+    if (!data.ok) {
+        console.error("Telegram sendMessage failed:", data);
+    }
 }
 
 /**
